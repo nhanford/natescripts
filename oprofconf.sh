@@ -25,8 +25,8 @@ if ! [-a ./globus-toolkit-repo_latest_all.deb]
   then
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ECDCAD72428D7C01
     wget http://toolkit.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo_latest_all.deb
-    dpkg -i globus-toolkit-repo_latest_all.deb
+    sudo dpkg -i globus-toolkit-repo_latest_all.deb
 fi
 sudo apt-get update
 sudo apt-get install linux-image-$(uname -r)-dbgsym oprofile iperf3 emacs netperf nuttcp flowgrind systemtap --assume-yes
-
+ch
