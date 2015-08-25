@@ -1,5 +1,5 @@
 #!/bin/bash
 for i in {1..10}
 do
-   iperf3 -c 10.12.1.20 -O 5 -t 30 -w 250M -Z | tee -a local-40-40-pon-pc-1500B.txt
+   iperf3 -c 10.120.1.55 -O 23 -t 30 -w 512M -Z | tee -a loop-40-10-pon-nopc-9000B.txt
 done
