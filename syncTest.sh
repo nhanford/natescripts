@@ -22,12 +22,12 @@ for i in htcp reno cubic
 do
 
     # 2 TCP unpaced, grabbing for max
-    ssh nhanford@192.168.120.190 iperf3 -VJc 192.168.100.192 -p 5200 -t45 --logfile T-T-unpaced190.json &
-    ssh nhanford@192.168.120.191 iperf3 -VJc 192.168.100.192 -p 5201 -t45 --logfile T-T-unpaced191.json 
+    ssh nhanford@192.168.120.190 iperf3 -VJc 192.168.100.192 -p 5200 -t45 --logfile T-T-190.json &
+    ssh nhanford@192.168.120.191 iperf3 -VJc 192.168.100.192 -p 5201 -t45 --logfile T-T-191.json 
     
     # 1 TCP unpaced, competing with a UDP paced to 1G, grabbing for max
-    ssh nhanford@192.168.120.190 iperf3 -VJc 192.168.100.192 -p 5200 -t45 --logfile T-U-unpaced190.json &
-    ssh nhanford@192.168.120.191 iperf3 -VJuc 192.168.100.192 -p 5201 -t45 --logfile T-U-unpaced191.json
+    ssh nhanford@192.168.120.190 iperf3 -VJc 192.168.100.192 -p 5200 -t45 --logfile T-U-190.json &
+    ssh nhanford@192.168.120.191 iperf3 -VJuc 192.168.100.192 -b 1Gbit -p 5201 -t45 --logfile T-U-191.json
 
     # 2 TCP paced to 400M
     ssh rootnh@192.168.120.190 tc qdisc add dev eth1 root fq maxrate 400Mbit
@@ -52,3 +52,8 @@ do
     ssh nhanford@192.168.120.190 iperf3 -VJc 192.168.100.192 -p 5200 -t45 --logfile T900M-100M-190.json &
     ssh nhanford@192.168.120.191 iperf3 -VJc 192.168.100.192 -p 5201 -t45 --logfile T100M-900M-191.json
 done
+
+d = `date +%F-%H-%M`
+mkdir mkdir ~/$d
+scp nhanford@192.168.120.190 *.json ~/$d
+scp nhanford@192.168.120.191 *.json ~/$d
