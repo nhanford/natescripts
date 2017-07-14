@@ -2,8 +2,6 @@
 
 # To be run from 192.168.120.193
 
-PORT = 5200
-
 ssh nhanford@192.168.120.192 << EOF
 iperf3 -sDp 5200
 iperf3 -sDp 5201
@@ -12,14 +10,21 @@ EOF
 # Remove any remnants of pacing
 for i in 192.168.120.190 192.168.120.191
 do
-    ssh rootnh@$i << EOF
-    ifconfig eth1 mtu 9000
-    tc qdisc del dev eth1 root
-EOF
+    ssh rootnh@$i ifconfig eth1 mtu 9000
 done
 
 for i in htcp reno cubic
 do
+    ssh rootnh@192.168.120.190 << EOF 
+sysctl -w net.ipv4.tcp_congestion_control=$i
+tc qdisc del dev eth1 root
+EOF
+    
+    ssh rootnh@192.168.120.191 << EOF 
+sysctl -w net.ipv4.tcp_congestion_control=$i
+tc qdisc del eth1 root
+EOF
+    
     # 2 TCP unpaced, grabbing for max
     ssh nhanford@192.168.120.190 iperf3 -i.1 -VJc 192.168.100.192 -p 5200 -t45 --logfile $i-T-T-190.json &
     ssh nhanford@192.168.120.191 iperf3 -i.1 -VJc 192.168.100.192 -p 5201 -t45 --logfile $i-T-T-191.json 
@@ -52,7 +57,10 @@ do
     ssh nhanford@192.168.120.191 iperf3 -i.1 -VJc 192.168.100.192 -p 5201 -t45 --logfile $i-T100M-900M-191.json
 done
 
-d = `date +%F-%H-%M`
+d=$(date +%F-%H-%M)
 mkdir ~/$d
-scp nhanford@192.168.120.190:*.json ~/$d
-scp nhanford@192.168.120.191:*.json ~/$d
+scp nhanford@192.168.120.190:~/*.json ~/$d
+scp nhanford@192.168.120.191:~/*.json ~/$d
+
+ssh nhanford@192.168.120.190 rm *.json
+ssh nhanford@192.168.120.191 rm *.json
