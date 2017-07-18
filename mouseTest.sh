@@ -50,3 +50,9 @@ do
     ssh nhanford@192.168.120.191 iperf3 -i.1 -uc 192.168.100.192 -b 1Gbit -p 5201 -t1
     sleep 3
 done
+
+d=$(date +%F-%H-%M)
+mkdir ~/$d
+scp nhanford@192.168.120.190:~/*.json ~/$d
+
+ssh nhanford@192.168.120.190 rm *.json
