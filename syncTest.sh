@@ -27,6 +27,14 @@ ssh nhanford@192.168.120.190 iperf3 -i.1 -VJc 192.168.100.192 -p 5200 -t45 --log
 ssh nhanford@192.168.120.191 iperf3 -i.1 -VJuc 192.168.100.192 -b 1Gbit -p 5201 -t45 --logfile htcp-U-T-191.json
 sleep 3
 
+# 1 TCP unpaced, competing with a repeating bursty set of mouse flows
+ssh nhanford@192.168.120.190 iperf3 -i.1 -VJc 192.168.100.192 -p 5200 -t45 --logfile htcp-T-U-190.json &
+for i in {1..14}
+do
+    ssh nhanford@192.168.120.191 iperf3 -i.1 -VJuc 192.168.100.192 -b 1Gbit -p 5201 -t1 --logfile htcp-U-T-191.json
+    sleep 3
+done
+
 # 2 TCP paced to 400M
 ssh rootnh@192.168.120.190 tc qdisc add dev eth1 root fq maxrate 400Mbit
 ssh rootnh@192.168.120.191 tc qdisc add dev eth1 root fq maxrate 400Mbit
