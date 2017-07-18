@@ -21,7 +21,7 @@ for path in glob('*.json'):
         #if 'omitted' in title: title.remove('omitted')
         writer.writerow(title)
         for interval in data['intervals']:
-            del interval['streams'][0]['omitted']
+            #del interval['streams'][0]['omitted']
             vals = interval['streams'][0].values()
             writer.writerow(vals)
 
