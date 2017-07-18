@@ -26,7 +26,7 @@ done
 
 # 1 TCP paced, competing with a repeating bursty set of mouse flows
 ssh rootnh@192.168.120.190 tc qdisc add dev eth1 root fq maxrate 1Gbit
-ssh nhanford@192.168.120.190 iperf3 -i.1 -VJc 192.168.100.192 -p 5200 -t600 --logfile htcp-T900-U-190.json &
+ssh nhanford@192.168.120.190 iperf3 -i.1 -VJc 192.168.100.192 -p 5200 -t600 --logfile htcp-T1000-U-190.json &
 for i in {1..200}
 do
     ssh nhanford@192.168.120.191 iperf3 -i.1 -uc 192.168.100.192 -b 1Gbit -p 5201 -t1
@@ -44,7 +44,7 @@ done
 
 # 1 TCP paced, competing with a repeating bursty set of mouse flows
 ssh rootnh@192.168.120.190 tc qdisc add dev eth1 root fq maxrate 500Mbit
-ssh nhanford@192.168.120.190 iperf3 -i.1 -VJc 192.168.100.192 -p 5200 -t600 --logfile htcp-T900-U-190.json &
+ssh nhanford@192.168.120.190 iperf3 -i.1 -VJc 192.168.100.192 -p 5200 -t600 --logfile htcp-T500-U-190.json &
 for i in {1..200}
 do
     ssh nhanford@192.168.120.191 iperf3 -i.1 -uc 192.168.100.192 -b 1Gbit -p 5201 -t1
