@@ -1,9 +1,6 @@
 #!/bin/bash
 
-ssh nhanford@192.168.120.192 << EOF
-nuttcp -SP5000
-nuttcp -SP5001
-EOF
+ssh nhanford@192.168.120.192 nuttcp -S
 
 #kill old pacing stuff
 for i in 192.168.120.190 192.168.120.191
