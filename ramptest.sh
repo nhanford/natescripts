@@ -32,8 +32,8 @@ mkdir ~/$d
 scp nhanford@192.168.120.190:~/*.txt ~/$d
 scp nhanford@192.168.120.191:~/*.txt ~/$d
 
-ssh nhanford@192.168.120.190 rm *.txt
-ssh nhanford@192.168.120.191 rm *.txt
+#ssh nhanford@192.168.120.190 rm *.txt
+#ssh nhanford@192.168.120.191 rm *.txt
 
 for i in 192.168.120.190 192.168.120.191
 do
