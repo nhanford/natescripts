@@ -19,8 +19,8 @@ do
         ssh rootnh@$j tc qdisc change dev eth1 root fq maxrate ${i}00Mbit
     done
     #Sleep processes nuttcp
-    ssh nhanford@192.168.120.190 nuttcp  -vv -T45 -i.1 -fparse 192.168.120.192 > T$i-T$i-190.txt &
-    ssh nhanford@192.168.120.191 nuttcp  -vv -T45 -i.1 -fparse 192.168.120.192 > T$i-T$i-191.txt
+    ssh nhanford@192.168.120.190 nuttcp  -vv -T45 -i.1 -fparse 192.168.120.192 | tee T$i-T$i-190.txt &
+    ssh nhanford@192.168.120.191 nuttcp  -vv -T45 -i.1 -fparse 192.168.120.192 | tee T$i-T$i-191.txt
     #Final wait
 done
 
