@@ -46,10 +46,14 @@ for path in glob.glob('*.csv'):
     df = pd.read_csv(path)
     fig, ax = plt.subplots()
     df['time'] = df.index / float(10)
-    ax = df.plot(x='time', y='rate_Mbps', color='k')
-    ax.set_title('Achieved throughput')
+    ax = df.plot(x='time', y='rate_Mbps')
+    ax2 = df.plot(x='time', y='retrans', secondary_y=True, ax=ax)
     ax.set_xlabel('time (s)')
     ax.set_ylabel('throughput (Mbps)')
+    ax2.set_ylabel('Retransmissions')
+    ax.set_title('Achieved throughput')
+    
+    
     #ax.legend().set_visible(False)
     plt.tight_layout()
     plt.savefig(splitext(path)[0]+'.pdf',format='pdf')
