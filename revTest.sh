@@ -22,7 +22,7 @@ do
         ssh rootnh@$j tc qdisc change dev eth1 root fq maxrate ${i}00Mbit
     done
     #Sleep processes nuttcp
-    nhanford@192.168.120.192 << EOF 
+    ssh nhanford@192.168.120.192 << EOF 
 nuttcp -v -r -p8190 -T300 -i.1 -fparse 192.168.100.192 > T${i}00-T${i}00-190.txt &
 nuttcp -v -r -p8191 -T300 -i.1 -fparse 192.168.100.192 > T${i}00-T${i}00-191.txt
 EOF
