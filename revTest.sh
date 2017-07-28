@@ -23,8 +23,8 @@ do
     done
     #Sleep processes nuttcp
     ssh nhanford@192.168.120.192 << EOF 
-nuttcp -v -t -p8190 -T60 -i.1 -fparse 192.168.100.190 > T${i}00-T${i}00-190.txt &
-nuttcp -v -t -p8191 -T60 -i.1 -fparse 192.168.100.191 > T${i}00-T${i}00-191.txt
+nuttcp -v -r -R${i}00M -p8190 -T60 -i.1 -fparse 192.168.100.190 > T${i}00-T${i}00-190.txt &
+nuttcp -v -r -R${i}00M -p8191 -T60 -i.1 -fparse 192.168.100.191 > T${i}00-T${i}00-191.txt
 EOF
 done
 
