@@ -48,6 +48,8 @@ for path in glob.glob('*.csv'):
     df['time'] = df.index / float(10)
     ax = df.plot(x='time', y='rate_Mbps')
     ax2 = df.plot(x='time', y='retrans', secondary_y=True, ax=ax)
+    ax.set_ylim(bottom=0)
+    ax2.set_ylim(bottom=0)
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Throughput (Mbps)')
     ax2.set_ylabel('Retransmissions')
