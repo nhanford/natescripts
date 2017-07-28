@@ -30,7 +30,7 @@ done
 
 d=$(date +%F-%H-%M)
 mkdir ~/$d
-rsync nhanford@192.168.120.192:*.txt ~/$d
+ssh nhanford@192.168.120.192:~/*.txt ~/$d
 ssh nhanford@192.168.120.192 rm *.txt
 
 for i in 192.168.120.190 192.168.120.191
