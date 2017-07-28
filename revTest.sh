@@ -23,14 +23,14 @@ do
     done
     #Sleep processes nuttcp
     ssh nhanford@192.168.120.192 << EOF 
-nuttcp -v -r -p8190 -T300 -i.1 -fparse 192.168.100.192 > T${i}00-T${i}00-190.txt &
-nuttcp -v -r -p8191 -T300 -i.1 -fparse 192.168.100.192 > T${i}00-T${i}00-191.txt
+nuttcp -v -r -p8190 -T60 -i.1 -fparse 192.168.100.192 > T${i}00-T${i}00-190.txt &
+nuttcp -v -r -p8191 -T60 -i.1 -fparse 192.168.100.192 > T${i}00-T${i}00-191.txt
 EOF
 done
 
 d=$(date +%F-%H-%M)
 mkdir ~/$d
-ssh nhanford@192.168.120.192:~/*.txt ~/$d
+scp nhanford@192.168.120.192:~/*.txt ~/$d
 ssh nhanford@192.168.120.192 rm *.txt
 
 for i in 192.168.120.190 192.168.120.191
