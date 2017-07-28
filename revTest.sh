@@ -1,7 +1,5 @@
 #!/bin/bash
 
-ssh nhanford@192.168.120.192 nuttcp -S
-
 #kill old pacing stuff
 for i in 192.168.120.190 192.168.120.191
 do
@@ -14,9 +12,8 @@ done
 
 for i in 192.168.120.190 192.168.120.191
 do
-    ssh nhanford@$i tc qdisc del dev eth1 root
+    ssh nhanford@$i nuttcp -S
 done
-
 
 for i in {1..10}
 do
@@ -25,13 +22,16 @@ do
         ssh rootnh@$j tc qdisc change dev eth1 root fq maxrate ${i}00Mbit
     done
     #Sleep processes nuttcp
-    nuttcp -v -r -p8190 -T300 -i.1 -fparse 192.168.100.192 | tee T${i}00-T${i}00-190.txt &
-    nuttcp -v -r -p8191 -T300 -i.1 -fparse 192.168.100.192 | tee T${i}00-T${i}00-191.txt
+    nhanford@192.168.120.192 << EOF 
+nuttcp -v -r -p8190 -T300 -i.1 -fparse 192.168.100.192 > T${i}00-T${i}00-190.txt &
+nuttcp -v -r -p8191 -T300 -i.1 -fparse 192.168.100.192 > T${i}00-T${i}00-191.txt
+EOF
 done
 
 d=$(date +%F-%H-%M)
 mkdir ~/$d
-mv *.txt ~/$d
+rsync nhanford@192.168.120.192:*.txt ~/$d
+ssh nhanford@192.168.120.192 rm *.txt
 
 for i in 192.168.120.190 192.168.120.191
 do
