@@ -12,6 +12,12 @@ tc qdisc show dev eth1
 EOF
 done
 
+for i in 192.168.120.190 192.168.120.191
+do
+    ssh nhanford@$i tc qdisc del dev eth1 root
+done
+
+
 for i in {1..10}
 do
     for j in 192.168.120.190 192.168.120.191
@@ -19,20 +25,13 @@ do
         ssh rootnh@$j tc qdisc change dev eth1 root fq maxrate ${i}00Mbit
     done
     #Sleep processes nuttcp
-    ssh nhanford@192.168.120.190 nuttcp -v -T60 -u -Ri300m/20 192.168.100.192 &
-    ssh nhanford@192.168.120.190 nuttcp -v -T60 -i.1 -fparse 192.168.100.192 | tee T${i}00-T${i}00-190.txt &
-    ssh nhanford@192.168.120.191 nuttcp -v -T60 -i.1 -fparse 192.168.100.192 | tee T${i}00-T${i}00-191.txt
-    #Final wait
+    nuttcp -v -r -p8190 -T300 -i.1 -fparse 192.168.100.192 | tee T${i}00-T${i}00-190.txt &
+    nuttcp -v -r -p8191 -T300 -i.1 -fparse 192.168.100.192 | tee T${i}00-T${i}00-191.txt
 done
 
 d=$(date +%F-%H-%M)
 mkdir ~/$d
-scp nhanford@192.168.120.190:~/*.txt ~/$d
-scp nhanford@192.168.120.191:~/*.txt ~/$d
 mv *.txt ~/$d
-
-ssh nhanford@192.168.120.190 rm *.txt
-ssh nhanford@192.168.120.191 rm *.txt
 
 for i in 192.168.120.190 192.168.120.191
 do

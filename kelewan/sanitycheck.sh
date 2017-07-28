@@ -23,5 +23,11 @@ rm *.bw
 d=$(date +%F-%H-%M)
 mkdir ~/$d
 mv *.json ~/$d
+cp iPlot.py ~/$d
 
 sudo cpupower -c all frequency-set -f 1.2G
+
+cd ~/$d
+./iPlot.py
+echo $d
+
