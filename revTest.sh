@@ -28,11 +28,6 @@ nuttcp -v -r -R${i}00M -p8191 -T300 -i.1 -fparse 192.168.100.191 > T${i}00-T${i}
 EOF
 done
 
-d=$(date +%F-%H-%M)
-mkdir ~/$d
-scp nhanford@192.168.120.192:~/*.txt ~/$d
-ssh nhanford@192.168.120.192 rm *.txt
-
 for i in 192.168.120.190 192.168.120.191
 do
     ssh rootnh@$i tc qdisc del dev eth1 root

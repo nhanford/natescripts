@@ -11,3 +11,5 @@ wget -qO - http://downloads.perfsonar.net/debian/perfsonar-debian-official.gpg.k
 apt update
 
 apt install git perfsonar-tools
+
+git clone git@github.com:nhanford/natescripts.git
