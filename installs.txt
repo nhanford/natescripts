@@ -1,0 +1,30 @@
+build-essential git vim valgrind flex bison gnuplot gnuplot-qt graphviz swi-prolog erlang ghc golang haskell-platform python-scipy python-numpy python-matplotlib python3-scipy python3-numpy python3-matplotlib texlive-full oprofile 
+
+#Debug Symbols
+echo "deb http://ddebs.ubuntu.com `lsb_release -cs` main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/ddebs.list
+echo "deb http://ddebs.ubuntu.com `lsb_release -cs`-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/ddebs.list 
+echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-proposed main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/ddebs.list
+wget -qO - http://ddebs.ubuntu.com/dbgsym-release-key.asc | sudo apt-key add -
+
+#Dell Hardware Management
+sudo echo "deb http://linux.dell.com/repo/community/ubuntu `lsb_release -cs` openmanage" | sudo tee -a /etc/apt/sources.list.d/linux.dell.com.sources.list
+sudo gpg --keyserver pool.sks-keyservers.net --recv-key 1285491434D8786F
+sudo gpg -a --export 1285491434D8786F | sudo apt-key add -
+
+
+#PerfSONAR Tools
+cd /etc/apt/sources.list.d/
+sudo wget http://downloads.perfsonar.net/debian/perfsonar-jessie-4.0.list
+wget -qO - http://downloads.perfsonar.net/debian/perfsonar-debian-official.gpg.key | sudo apt-key add -
+
+#PerfSONAR Tools for ESnet
+cd /etc/apt/sources.list.d/
+wget http://downloads.perfsonar.net/debian/perfsonar-jessie-4.0.list
+wget -qO - http://downloads.perfsonar.net/debian/perfsonar-debian-official.gpg.key | apt-key add -
+
+
+linux-image-`uname -r`-dbgsym linux-headers-`uname -r` build-essential git vim valgrind flex bison gnuplot gnuplot-qt graphviz swi-prolog erlang ghc golang haskell-platform python-scipy python-numpy python-matplotlib python3-scipy python3-numpy python3-matplotlib texlive-full oprofile perfsonar-tools smokeping cpufrequtils linux-tools-common linux-tools-generic linux-cloud-tools-generic emacs systemtap strace ifupdown-extra nvidia-cuda-toolkit dpdk dpdk-dev libdpdk-dev likwid wireshark arping unattended-upgrades
+
+linux-image-`uname -r`-dbgsym linux-headers-`uname -r` build-essential git vim valgrind flex bison gnuplot gnuplot-qt graphviz swi-prolog erlang ghc golang haskell-platform python-scipy python-numpy python-matplotlib python3-scipy python3-numpy python3-matplotlib texlive-full oprofile perfsonar-tools cpufrequtils linux-tools-common linux-tools-generic linux-cloud-tools-generic emacs systemtap strace ifupdown-extra dpdk dpdk-dev libdpdk-dev likwid wireshark arping unattended-upgrades
+
+linux-image-`uname -r`-dbgsym linux-headers-`uname -r` build-essential git vim gnuplot gnuplot-qt graphviz python-scipy python-numpy python-matplotlib python3-scipy python3-numpy python3-matplotlib texlive oprofile perfsonar-tools cpufrequtils linux-tools-common linux-tools-generic linux-cloud-tools-generic emacs systemtap strace ifupdown-extra dpdk dpdk-dev libdpdk-dev likwid wireshark arping unattended-upgrades scribus vpnc compizconfig-settings-manager network-manager-vpnc-gnome geany
