@@ -51,3 +51,11 @@ ax2 = plt.plot(pacing, retrans, color='g')
 ax2 = plt.gca()
 ax2.set_ylabel('retransmissions', color='g')
 plt.savefig('rates.pdf', format='pdf')
+
+
+for path in glob.glob('*.csv'):
+	df = pd.read_csv(path)
+	var = 
+	pattern = re.compile('T\d+')
+    pacing = pattern.search(path)
+    
