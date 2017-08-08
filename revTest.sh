@@ -3,7 +3,7 @@
 #kill old pacing stuff
 for i in 190 191 194 195
 do
-    ssh rootnh@$i << EOF
+    ssh rootnh@192.168.120.$i << EOF
 ifconfig eth1 mtu 9000
 tc qdisc add dev eth1 root fq
 tc qdisc show dev eth1
