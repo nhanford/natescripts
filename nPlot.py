@@ -42,10 +42,14 @@ for path in glob.glob('*.txt'):
                     cwnd = pattern.sub('',cwnd)
                     writer.writerow([megabytes, real_sec, rate_Mbps, retrans, cwnd])
                     
+#Needs to handle case of multiple files with the same rate.
 for path in glob.glob('*.csv'):
 	df = pd.read_csv(path)
 	fig, ax = plt.subplots()
-	df['time'] = df.index / float(10)
+	try:
+		df['time'] = df.index / float(10)
+	except TypeError as e:
+		print path, e
 	ax = df.plot(x='time', y='rate_Mbps')
 	ax2 = df.plot(x='time', y='retrans', secondary_y=True, ax=ax)
 	ax.set_ylim(bottom=0)
