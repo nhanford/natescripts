@@ -1,0 +1,6 @@
+
+sleep 3
+iperf3 -VRJn30G -i.1 -c 192.168.120.190 --logfile t${i}00-190.json &
+iperf3 -VRJn30G -i.1 -c 192.168.120.191 --logfile t${i}00-191.json &
+iperf3 -VRJn30G -i.1 -c 192.168.120.194 --logfile t${i}00-194.json &
+iperf3 -VRJn30G -i.1 -c 192.168.120.195 --logfile t${i}00-195.json

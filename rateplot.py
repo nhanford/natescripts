@@ -35,7 +35,6 @@ for path in glob.glob('*.txt'):
                         retrans[pacing] += retransmits
                     else:
                         retrans[pacing] = retransmits
-                    
 
 lists = sorted(rates.items())
 pacing, throughput = zip(*lists)
@@ -52,19 +51,19 @@ ax2 = plt.gca()
 ax2.set_ylabel('retransmissions', color='g')
 plt.savefig('rates.pdf', format='pdf')
 
-
 variances = {'rate': [], 'variance': []}
 for path in glob.glob('*.csv'):
-	df = pd.read_csv(path)
-	var = df.var()['rate_Mbps']
-	pattern = re.compile('T\d+')
-	pacing = pattern.search(path)
-	if pacing and var:
-		pacing = int(pacing.group(0)[1:])
-		if variances.get(pacing) is not None:
-			variances[pacing] += var
-		else:
-			variances[pacing] = var
+    df = pd.read_csv(path)
+    var = df.var()['rate_Mbps']
+    print var
+    pattern = re.compile('T\d+')
+    pacing = pattern.search(path)
+    if pacing and var:
+        pacing = int(pacing.group(0)[1:])
+        if variances.get(pacing) is not None:
+            variances[pacing] += var
+        else:
+            variances[pacing] = var
 
 df = pd.DataFrame(data=variances)
 fig, ax = plt.subplots()

@@ -12,7 +12,10 @@ done
 
 for i in 190 191 194 195
 do
-    ssh nhanford@192.168.120.$i nuttcp -S
+    ssh nhanford@192.168.120.$i << EOF 
+nuttcp -S
+iperf3 -sD
+EOF
 done
 
 for i in {1..10}
@@ -23,10 +26,10 @@ do
     done
     #Sleep processes nuttcp
     ssh nhanford@192.168.120.192 << EOF 
-nuttcp -v -r -R${i}00M -p8190 -T300 -i.1 -fparse 192.168.100.190 > T${i}00-T${i}00-190.txt &
-nuttcp -v -r -R${i}00M -p8191 -T300 -i.1 -fparse 192.168.100.191 > T${i}00-T${i}00-191.txt &
-nuttcp -v -r -R${i}00M -p8194 -T300 -i.1 -fparse 192.168.100.194 > T${i}00-T${i}00-194.txt &
-nuttcp -v -r -R${i}00M -p8195 -T300 -i.1 -fparse 192.168.100.195 > T${i}00-T${i}00-195.txt
+nuttcp -v -r -R${i}00M -p8190 -T300 -i.1 -fparse 192.168.100.190 > T${i}00-190.txt &
+nuttcp -v -r -R${i}00M -p8191 -T300 -i.1 -fparse 192.168.100.191 > T${i}00-191.txt &
+nuttcp -v -r -R${i}00M -p8194 -T300 -i.1 -fparse 192.168.100.194 > T${i}00-194.txt &
+nuttcp -v -r -R${i}00M -p8195 -T300 -i.1 -fparse 192.168.100.195 > T${i}00-195.txt
 EOF
 done
 
@@ -42,4 +45,4 @@ mkdir ~/$d
 mv *.txt ~/$d
 EOF
 
-rsync -r nhanford@192.168.120.192 ~/$d ./
+scp -r nhanford@192.168.120.192 ~/$d ./
