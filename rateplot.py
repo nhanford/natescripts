@@ -55,17 +55,18 @@ variances = {'rate': [], 'variance': []}
 for path in glob.glob('*.csv'):
     df = pd.read_csv(path)
     var = df.var()['rate_Mbps']
-    print var
     pattern = re.compile('T\d+')
     pacing = pattern.search(path)
     if pacing and var:
         pacing = int(pacing.group(0)[1:])
-        if variances.get(pacing) is not None:
-            variances[pacing] += var
+        if pacing in variances['rate']:
+            variances['variance'][variances['rate'].index(pacing)] += var
         else:
-            variances[pacing] = var
+            variances['rate'].append(pacing)
+            variances['variance'].append(var)
 
-df = pd.DataFrame(data=variances)
+df = pd.DataFrame(data=variances).sort_values('rate')
 fig, ax = plt.subplots()
 ax = df.plot(x='rate', y='variance')
-plt.show()
+plt.savefig('variances.pdf', format='pdf')
+
