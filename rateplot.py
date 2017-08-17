@@ -49,6 +49,7 @@ ax2 = ax.twinx()
 ax2 = plt.plot(pacing, retrans, color='g')
 ax2 = plt.gca()
 ax2.set_ylabel('retransmissions', color='g')
+plt.tight_layout()
 plt.savefig('rates.pdf', format='pdf')
 
 variances = {'rate': [], 'variance': []}
@@ -68,5 +69,6 @@ for path in glob.glob('*.csv'):
 df = pd.DataFrame(data=variances).sort_values('rate')
 fig, ax = plt.subplots()
 ax = df.plot(x='rate', y='variance')
+plt.tight_layout()
 plt.savefig('variances.pdf', format='pdf')
 
