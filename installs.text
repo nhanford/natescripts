@@ -30,6 +30,8 @@ cd /etc/apt/sources.list.d/
 wget http://downloads.perfsonar.net/debian/perfsonar-jessie-4.0.list
 wget -qO - http://downloads.perfsonar.net/debian/perfsonar-debian-official.gpg.key | apt-key add -
 
+#Fingerprint readers
+sudo add-apt-repository ppa:fingerprint/fingerprint-gui
 
 linux-image-`uname -r`-dbgsym linux-headers-`uname -r` build-essential git vim valgrind flex bison gnuplot gnuplot-qt graphviz swi-prolog erlang ghc golang haskell-platform python-scipy python-numpy python-matplotlib python3-scipy python3-numpy python3-matplotlib texlive-full oprofile perfsonar-tools smokeping cpufrequtils linux-tools-common linux-tools-generic linux-cloud-tools-generic emacs systemtap strace ifupdown-extra nvidia-cuda-toolkit dpdk dpdk-dev libdpdk-dev likwid wireshark arping unattended-upgrades
 
