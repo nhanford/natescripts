@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #kill old pacing stuff
-for i in 190 191 194 195
+for i in 190 191 194 195 196
 do
     ssh rootnh@192.168.120.$i << EOF
 ifconfig eth1 mtu 9000
@@ -10,17 +10,17 @@ tc qdisc show dev eth1
 EOF
 done
 
-for i in 190 191 194 195
+for i in 190 191 194 195 196
 do
     ssh nhanford@192.168.120.$i << EOF 
-nuttcp -S
+nuttcp -S -P 5$i
 iperf3 -sD
 EOF
 done
 
 for i in {1..10}
 do
-    for j in 190 191 194 195
+    for j in 190 191 194 195 196
     do
         ssh rootnh@192.168.120.$j tc qdisc change dev eth1 root fq maxrate ${i}00Mbit
     done
