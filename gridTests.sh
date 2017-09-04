@@ -23,7 +23,7 @@ chmod +r /media/gridTmp/rand.img
 pkill gridftp
 pkill iperf3
 pkill nuttcp
-globus-gridftp-server -p 8$i -aa -anonymous-user 'nhanford'&
+globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford'
 EOF
 done
 
