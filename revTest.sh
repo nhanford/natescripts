@@ -26,11 +26,11 @@ do
     done
     #Sleep processes nuttcp
     ssh nhanford@192.168.120.192 << EOF 
-nuttcp -v -r -R${i}00M -p8190 -T300 -i.1 -fparse 192.168.100.190 > T${i}00-190.txt &
-nuttcp -v -r -R${i}00M -p8191 -T300 -i.1 -fparse 192.168.100.191 > T${i}00-191.txt &
-nuttcp -v -r -R${i}00M -p8194 -T300 -i.1 -fparse 192.168.100.194 > T${i}00-194.txt &
-nuttcp -v -r -R${i}00M -p8195 -T300 -i.1 -fparse 192.168.100.195 > T${i}00-195.txt &
-nuttcp -v -r -R${i}00M -p8195 -T300 -i.1 -fparse 192.168.100.195 > T${i}00-196.txt 
+nuttcp -v -r -R${i}00M -P5190 -p8190 -T30 -i.1 -fparse 192.168.100.190 > T${i}00-190.txt &
+nuttcp -v -r -R${i}00M -P5191 -p8191 -T30 -i.1 -fparse 192.168.100.191 > T${i}00-191.txt &
+nuttcp -v -r -R${i}00M -P5194 -p8194 -T30 -i.1 -fparse 192.168.100.194 > T${i}00-194.txt &
+nuttcp -v -r -R${i}00M -P5195 -p8195 -T30 -i.1 -fparse 192.168.100.195 > T${i}00-195.txt &
+nuttcp -v -r -R${i}00M -P5196 -p8196 -T30 -i.1 -fparse 192.168.100.196 > T${i}00-196.txt 
 EOF
 done
 
