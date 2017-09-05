@@ -10,7 +10,7 @@ tc qdisc show dev eth1
 mkdir -p /media/gridTmp
 mount -t tmpfs -o size=1G tmpfs /media/gridTmp
 openssl rand -out /media/gridTmp/rand$i.img -base64 $(( 750 * 406322000000/550229 ))
-chmod +r /media/gridTmp/rand.img
+chmod +r /media/gridTmp/rand$i.img
 pkill gridftp
 pkill iperf3
 pkill nuttcp
