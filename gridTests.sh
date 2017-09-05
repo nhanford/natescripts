@@ -14,11 +14,11 @@ chmod +r /media/gridTmp/rand.img
 pkill gridftp
 pkill iperf3
 pkill nuttcp
-globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford'
+globus-gridftp-server -S -p 8$i -aa -anonymous-user 'rootnh'
 EOF
 done
 
-ssh nhanford@192.168.120.192 << EOF 
+ssh rootnh@192.168.120.192 << EOF 
 mkdir -p /media/gridTmp
 mount -t tmpfs -o size=4G tmpfs /media/gridTmp
 globus-url-copy -v ftp://192.168.120.190:8190/media/gridTmp/rand.img file:///media/gridtmp/rand190.img &
@@ -32,7 +32,7 @@ do
 	ssh rootnh@192.168.120.$j tc qdisc change dev eth1 root fq maxrate $200Mbit
 done
 #Sleep processes gridftp
-ssh nhanford@192.168.120.192 << EOF 
+ssh rootnh@192.168.120.192 << EOF 
 mkdir -p /media/gridTmp
 mount -t tmpfs -o size=4G tmpfs /media/gridTmp
 globus-url-copy -v ftp://192.168.120.190:8190/media/gridTmp/rand.img file://media/gridtmp/rand190.img &
