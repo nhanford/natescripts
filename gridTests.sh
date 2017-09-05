@@ -1,14 +1,5 @@
 #!/bin/bash
 
-pkill gridftp
-
-mkdir -p /media/gridTmp
-mount -t tmpfs -o size=1G tmpfs /media/gridTmp
-openssl rand -out /media/gridTmp/rand.img -base64 $(( 750 * 406322000000/550229 ))
-chmod +r /media/gridTmp/rand.img
-
-globus-gridftp-server -p -aa -anonymous-user 'nhanford'
-
 #kill old pacing stuff, create junk files
 for i in 190 191 194 195 196
 do
