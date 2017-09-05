@@ -21,11 +21,11 @@ done
 ssh rootnh@192.168.120.192 << EOF 
 mkdir -p /media/gridTmp
 mount -t tmpfs -o size=4G tmpfs /media/gridTmp
-globus-url-copy -v ftp://192.168.120.190:8190/media/gridTmp/rand.img file:///media/gridtmp/rand190.img &
-globus-url-copy -v ftp://192.168.120.191:8191/media/gridTmp/rand.img file://media/gridtmp/rand191.img &
-globus-url-copy -v ftp://192.168.120.194:8194/media/gridTmp/rand.img file://media/gridtmp/rand194.img &
-globus-url-copy -v ftp://192.168.120.195:8195/media/gridTmp/rand.img file://media/gridtmp/rand195.img &
-globus-url-copy -v ftp://192.168.120.196:8196/media/gridTmp/rand.img file://media/gridtmp/rand196.img
+globus-url-copy -v ftp://192.168.120.190:8190/media/gridTmp/rand.img file:///media/gridTmp/rand190.img > 190Tunpaced &
+globus-url-copy -v ftp://192.168.120.191:8191/media/gridTmp/rand.img file://media/gridTmp/rand191.img > 191Tunpaced &
+globus-url-copy -v ftp://192.168.120.194:8194/media/gridTmp/rand.img file://media/gridTmp/rand194.img > 194Tunpaced &
+globus-url-copy -v ftp://192.168.120.195:8195/media/gridTmp/rand.img file://media/gridTmp/rand195.img > 195Tunpaced &
+globus-url-copy -v ftp://192.168.120.196:8196/media/gridTmp/rand.img file://media/gridTmp/rand196.img > 196Tunpaced
 EOF
 for j in 190 191 194 195 196
 do
@@ -35,11 +35,11 @@ done
 ssh rootnh@192.168.120.192 << EOF 
 mkdir -p /media/gridTmp
 mount -t tmpfs -o size=4G tmpfs /media/gridTmp
-globus-url-copy -v ftp://192.168.120.190:8190/media/gridTmp/rand.img file://media/gridtmp/rand190.img &
-globus-url-copy -v ftp://192.168.120.191:8191/media/gridTmp/rand.img file://media/gridtmp/rand191.img &
-globus-url-copy -v ftp://192.168.120.194:8194/media/gridTmp/rand.img file://media/gridtmp/rand194.img &
-globus-url-copy -v ftp://192.168.120.195:8195/media/gridTmp/rand.img file://media/gridtmp/rand195.img &
-globus-url-copy -v ftp://192.168.120.196:8196/media/gridTmp/rand.img file://media/gridtmp/rand196.img 
+globus-url-copy -v ftp://192.168.120.190:8190/media/gridTmp/rand.img file://media/gridTmp/rand190.img > 190Tpaced &
+globus-url-copy -v ftp://192.168.120.191:8191/media/gridTmp/rand.img file://media/gridTmp/rand191.img > 191Tpaced &
+globus-url-copy -v ftp://192.168.120.194:8194/media/gridTmp/rand.img file://media/gridTmp/rand194.img > 194Tpaced &
+globus-url-copy -v ftp://192.168.120.195:8195/media/gridTmp/rand.img file://media/gridTmp/rand195.img > 195Tpaced &
+globus-url-copy -v ftp://192.168.120.196:8196/media/gridTmp/rand.img file://media/gridTmp/rand196.img > 196Tpaced 
 EOF
 for i in 190 191 194 195 196
 do
