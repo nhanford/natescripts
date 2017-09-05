@@ -17,11 +17,11 @@ EOF
 done
 
 ssh nhanford@192.168.120.192 << EOF 
-globus-url-copy -v ftp://192.168.120.190:8190/tmp/rand190.img file:///tmp/ > 190Tunpaced.txt &
-globus-url-copy -v ftp://192.168.120.191:8191/tmp/rand191.img file:///tmp/ > 191Tunpaced.txt &
-globus-url-copy -v ftp://192.168.120.194:8194/tmp/rand194.img file:///tmp/ > 194Tunpaced.txt &
-globus-url-copy -v ftp://192.168.120.195:8195/tmp/rand195.img file:///tmp/ > 195Tunpaced.txt &
-globus-url-copy -v ftp://192.168.120.196:8196/tmp/rand196.img file:///tmp/ > 196Tunpaced.txt
+globus-url-copy -vb ftp://192.168.120.190:8190/tmp/rand190.img file:///tmp/ > 190Tunpaced.txt &
+globus-url-copy -vb ftp://192.168.120.191:8191/tmp/rand191.img file:///tmp/ > 191Tunpaced.txt &
+globus-url-copy -vb ftp://192.168.120.194:8194/tmp/rand194.img file:///tmp/ > 194Tunpaced.txt &
+globus-url-copy -vb ftp://192.168.120.195:8195/tmp/rand195.img file:///tmp/ > 195Tunpaced.txt &
+globus-url-copy -vb ftp://192.168.120.196:8196/tmp/rand196.img file:///tmp/ > 196Tunpaced.txt
 EOF
 for j in 190 191 194 195 196
 do
@@ -30,11 +30,11 @@ done
 #Sleep processes gridftp
 ssh nhanford@192.168.120.192 << EOF 
 mkdir -p /tmp
-globus-url-copy -v ftp://192.168.120.190:8190/tmp/rand190.img file:///tmp/ > 190Tpaced.txt &
-globus-url-copy -v ftp://192.168.120.191:8191/tmp/rand191.img file:///tmp/ > 191Tpaced.txt &
-globus-url-copy -v ftp://192.168.120.194:8194/tmp/rand194.img file:///tmp/ > 194Tpaced.txt &
-globus-url-copy -v ftp://192.168.120.195:8195/tmp/rand195.img file:///tmp/ > 195Tpaced.txt &
-globus-url-copy -v ftp://192.168.120.196:8196/tmp/rand196.img file:///tmp/ > 196Tpaced.txt 
+globus-url-copy -vb ftp://192.168.120.190:8190/tmp/rand190.img file:///tmp/ > 190Tpaced.txt &
+globus-url-copy -vb ftp://192.168.120.191:8191/tmp/rand191.img file:///tmp/ > 191Tpaced.txt &
+globus-url-copy -vb ftp://192.168.120.194:8194/tmp/rand194.img file:///tmp/ > 194Tpaced.txt &
+globus-url-copy -vb ftp://192.168.120.195:8195/tmp/rand195.img file:///tmp/ > 195Tpaced.txt &
+globus-url-copy -vb ftp://192.168.120.196:8196/tmp/rand196.img file:///tmp/ > 196Tpaced.txt 
 EOF
 for i in 190 191 194 195 196
 do
