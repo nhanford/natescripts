@@ -49,4 +49,4 @@ mkdir ~/$d
 mv *.txt ~/$d
 EOF
 
-scp -r nhanford@192.168.120.192 ~/$d ./
+scp -r nhanford@192.168.120.192:~/$d ./
