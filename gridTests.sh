@@ -19,14 +19,16 @@ globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir /
 EOF
 done
 
-# flip these
 ssh nhanford@192.168.120.192 << EOF 
-time globus-url-copy -cc5 -vb ftp://192.168.120.190:8190/tmp/zero190.img file:///dev/null | tee -a 190Tunpaced.txt &
-time globus-url-copy -cc5 -vb ftp://192.168.120.191:8191/tmp/zero191.img file:///dev/null | tee -a 191Tunpaced.txt &
-time globus-url-copy -cc5 -vb ftp://192.168.120.194:8194/tmp/zero194.img file:///dev/null | tee -a 194Tunpaced.txt &
-time globus-url-copy -cc5 -vb ftp://192.168.120.195:8195/tmp/zero195.img file:///dev/null | tee -a 195Tunpaced.txt &
-time globus-url-copy -cc5 -vb ftp://192.168.120.196:8196/tmp/zero196.img file:///dev/null | tee -a 196Tunpaced.txt
+mkdir -p /tmp
+time globus-url-copy -cc5 -vb ftp://192.168.100.190:8190/tmp/zero190.img file:///dev/null | tee -a 190Tpaced.txt &
+time globus-url-copy -cc5 -vb ftp://192.168.100.191:8191/tmp/zero191.img file:///dev/null | tee -a 191Tpaced.txt &
+time globus-url-copy -cc5 -vb ftp://192.168.100.194:8194/tmp/zero194.img file:///dev/null | tee -a 194Tpaced.txt &
+time globus-url-copy -cc5 -vb ftp://192.168.100.195:8195/tmp/zero195.img file:///dev/null | tee -a 195Tpaced.txt &
+time globus-url-copy -cc5 -vb ftp://192.168.100.196:8196/tmp/zero196.img file:///dev/null | tee -a 196Tpaced.txt 
+sleep 100
 EOF
+
 for j in 190 191 194 195 196
 do
 	ssh rootnh@192.168.120.$j << EOF 
@@ -34,15 +36,16 @@ tc qdisc change dev eth1 root fq maxrate $200Mbit
 tc qdisc show dev eth1
 EOF
 done
-#Sleep processes gridftp
+
 ssh nhanford@192.168.120.192 << EOF 
-mkdir -p /tmp
-time globus-url-copy -cc5 -vb ftp://192.168.120.190:8190/tmp/zero190.img file:///dev/null | tee -a 190Tpaced.txt &
-time globus-url-copy -cc5 -vb ftp://192.168.120.191:8191/tmp/zero191.img file:///dev/null | tee -a 191Tpaced.txt &
-time globus-url-copy -cc5 -vb ftp://192.168.120.194:8194/tmp/zero194.img file:///dev/null | tee -a 194Tpaced.txt &
-time globus-url-copy -cc5 -vb ftp://192.168.120.195:8195/tmp/zero195.img file:///dev/null | tee -a 195Tpaced.txt &
-time globus-url-copy -cc5 -vb ftp://192.168.120.196:8196/tmp/zero196.img file:///dev/null | tee -a 196Tpaced.txt 
+time globus-url-copy -cc5 -vb ftp://192.168.100.190:8190/tmp/zero190.img file:///dev/null | tee -a 190Tunpaced.txt &
+time globus-url-copy -cc5 -vb ftp://192.168.100.191:8191/tmp/zero191.img file:///dev/null | tee -a 191Tunpaced.txt &
+time globus-url-copy -cc5 -vb ftp://192.168.100.194:8194/tmp/zero194.img file:///dev/null | tee -a 194Tunpaced.txt &
+time globus-url-copy -cc5 -vb ftp://192.168.100.195:8195/tmp/zero195.img file:///dev/null | tee -a 195Tunpaced.txt &
+time globus-url-copy -cc5 -vb ftp://192.168.100.196:8196/tmp/zero196.img file:///dev/null | tee -a 196Tunpaced.txt
+sleep 100
 EOF
+
 for i in 190 191 194 195 196
 do
     ssh rootnh@192.168.120.$i tc qdisc del dev eth1 root
