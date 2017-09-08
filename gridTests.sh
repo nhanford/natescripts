@@ -21,11 +21,11 @@ done
 
 ssh nhanford@192.168.120.192 << EOF 
 mkdir -p /tmp
-time globus-url-copy -cc 5 -vb ftp://192.168.100.190:8190/tmp/zero190.img file:///dev/null | tee -a 190Tpaced.txt &
-time globus-url-copy -cc 5 -vb ftp://192.168.100.191:8191/tmp/zero191.img file:///dev/null | tee -a 191Tpaced.txt &
-time globus-url-copy -cc 5 -vb ftp://192.168.100.194:8194/tmp/zero194.img file:///dev/null | tee -a 194Tpaced.txt &
-time globus-url-copy -cc 5 -vb ftp://192.168.100.195:8195/tmp/zero195.img file:///dev/null | tee -a 195Tpaced.txt &
-time globus-url-copy -cc 5 -vb ftp://192.168.100.196:8196/tmp/zero196.img file:///dev/null | tee -a 196Tpaced.txt 
+time globus-url-copy -cc 5 ftp://192.168.100.190:8190/tmp/zero190.img file:///dev/null > 190Tpaced.txt &
+time globus-url-copy -cc 5 ftp://192.168.100.191:8191/tmp/zero191.img file:///dev/null > 191Tpaced.txt &
+time globus-url-copy -cc 5 ftp://192.168.100.194:8194/tmp/zero194.img file:///dev/null > 194Tpaced.txt &
+time globus-url-copy -cc 5 ftp://192.168.100.195:8195/tmp/zero195.img file:///dev/null > 195Tpaced.txt &
+time globus-url-copy -cc 5 ftp://192.168.100.196:8196/tmp/zero196.img file:///dev/null > 196Tpaced.txt 
 sleep 100
 EOF
 
@@ -38,11 +38,11 @@ EOF
 done
 
 ssh nhanford@192.168.120.192 << EOF 
-time globus-url-copy -cc 5 -vb ftp://192.168.100.190:8190/tmp/zero190.img file:///dev/null | tee -a 190Tunpaced.txt &
-time globus-url-copy -cc 5 -vb ftp://192.168.100.191:8191/tmp/zero191.img file:///dev/null | tee -a 191Tunpaced.txt &
-time globus-url-copy -cc 5 -vb ftp://192.168.100.194:8194/tmp/zero194.img file:///dev/null | tee -a 194Tunpaced.txt &
-time globus-url-copy -cc 5 -vb ftp://192.168.100.195:8195/tmp/zero195.img file:///dev/null | tee -a 195Tunpaced.txt &
-time globus-url-copy -cc 5 -vb ftp://192.168.100.196:8196/tmp/zero196.img file:///dev/null | tee -a 196Tunpaced.txt
+time globus-url-copy -cc 5 ftp://192.168.100.190:8190/tmp/zero190.img file:///dev/null > 190Tunpaced.txt &
+time globus-url-copy -cc 5 ftp://192.168.100.191:8191/tmp/zero191.img file:///dev/null > 191Tunpaced.txt &
+time globus-url-copy -cc 5 ftp://192.168.100.194:8194/tmp/zero194.img file:///dev/null > 194Tunpaced.txt &
+time globus-url-copy -cc 5 ftp://192.168.100.195:8195/tmp/zero195.img file:///dev/null > 195Tunpaced.txt &
+time globus-url-copy -cc 5 ftp://192.168.100.196:8196/tmp/zero196.img file:///dev/null > 196Tunpaced.txt
 sleep 100
 EOF
 
