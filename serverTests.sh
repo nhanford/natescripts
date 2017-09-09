@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #create junk files, refresh servers
-for i in 190 191 192 194 195 196
+for i in 190 191 194 195 196
 do
     ssh rootnh@192.168.120.$i << EOF
 ifconfig eth1 mtu 9000
@@ -19,10 +19,15 @@ globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/
 EOF
 done
 
+ssh rootnh@192.168.120.192 << EOF
+ifconfig eth1 mtu 9000
+globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log
+EOF
+
 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 sleep 180
 
-for j in 190 191 194 195 196
+for j in 190 191 192 194 195 196
 do
 	ssh rootnh@192.168.120.$j << EOF 
 tc qdisc del dev eth1 root
