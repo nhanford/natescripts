@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #create junk files, refresh servers
-for i in 190 191 194 195 196
+for i in 190 191 192 194 195 196
 do
     ssh rootnh@192.168.120.$i << EOF
 ifconfig eth1 mtu 9000
@@ -16,13 +16,11 @@ pkill gridftp
 pkill iperf3
 pkill nuttcp
 # server -z and then logpath
-globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir /
+globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir / -z ~/$i.log
 EOF
 done
 
-d=$(date +%F-%H-%M)
-
-globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file -z ~/paced$d.log
+globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 sleep 180
 
 for j in 190 191 194 195 196
@@ -33,4 +31,14 @@ tc qdisc show dev eth1
 EOF
 done
 
-globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file -z ~/paced$d.log
+globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
+sleep 180
+
+d=$(date +%F-%H-%M)
+
+ssh nhanford@192.168.120.192 << EOF
+mkdir ~/$d
+mv *.txt ~/$d
+EOF
+
+scp -r nhanford@192.168.120.192:~/$d ./
