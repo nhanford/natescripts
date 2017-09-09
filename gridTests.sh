@@ -16,7 +16,7 @@ pkill gridftp
 pkill iperf3
 pkill nuttcp
 # server -z and then logpath
-globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir /
+globus-gridftp-server -z -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir /
 EOF
 done
 
