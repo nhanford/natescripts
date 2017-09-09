@@ -22,7 +22,7 @@ done
 
 d=$(date +%F-%H-%M)
 
-globus-url-copy -cc 5 -af alias-file -f xfer-file -z ~/paced$d.log
+globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file -z ~/paced$d.log
 sleep 180
 
 for j in 190 191 194 195 196
@@ -33,4 +33,4 @@ tc qdisc show dev eth1
 EOF
 done
 
-globus-url-copy -cc 5 -af alias-file -f xfer-file -z ~/paced$d.log
+globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file -z ~/paced$d.log
