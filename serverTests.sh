@@ -7,10 +7,10 @@ do
 ifconfig eth1 mtu 9000
 tc qdisc add dev eth1 root fq maxrate 200Mbit
 tc qdisc show dev eth1
-if [ ! -e "/tmp/zero$i.img" ]
+if [ ! -e "/tmp/zero.img" ]
 then
-	dd if=/dev/zero of=/tmp/zero$i.img bs=1M count=4096
-	chmod +r /tmp/zero$i.img
+	dd if=/dev/zero of=/tmp/zero.img bs=1M count=4096
+	chmod +r /tmp/zero.img
 fi
 pkill gridftp
 pkill iperf3
@@ -21,21 +21,22 @@ done
 
 ssh rootnh@192.168.120.192 << EOF
 ifconfig eth1 mtu 9000
-globus-gridftp-server -S -p 8190 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
+globus-gridftp-server -S -p 8192 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
 EOF
 
 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
+sleep 10
 
-for j in 190 191 194 195 196
+for i in 190 191 194 195 196
 do
-	ssh rootnh@192.168.120.$j << EOF 
+	ssh rootnh@192.168.120.$i << EOF 
 tc qdisc del dev eth1 root
 tc qdisc show dev eth1
 EOF
 done
 
 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
-sleep 180
+sleep 10
 
 d=$(date +%F-%H-%M)
 mkdir ~/$d
