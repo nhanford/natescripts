@@ -21,7 +21,7 @@ done
 
 ssh rootnh@192.168.120.192 << EOF
 ifconfig eth1 mtu 9000
-globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log
+globus-gridftp-server -S -p 8190 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
 EOF
 
 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
