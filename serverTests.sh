@@ -9,7 +9,7 @@ tc qdisc add dev eth1 root fq maxrate 200Mbit
 tc qdisc show dev eth1
 if [ ! -e "/tmp/zero$i.img" ]
 then
-	dd if=/dev/zero of=/tmp/zero.img bs=1M count=4096
+	dd if=/dev/zero of=/tmp/zero$i.img bs=1M count=4096
 	chmod +r /tmp/zero$i.img
 fi
 pkill gridftp
