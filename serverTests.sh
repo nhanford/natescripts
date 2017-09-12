@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#create junk files, refresh servers
+# create junk files, start servers
 for i in 190 191 194 195 196
 do
     ssh rootnh@192.168.120.$i << EOF
@@ -12,9 +12,6 @@ then
 	dd if=/dev/zero of=/tmp/zero.img bs=1M count=4096
 	chmod +r /tmp/zero.img
 fi
-pkill gridftp
-pkill iperf3
-pkill nuttcp
 globus-gridftp-server -S -p 8$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/$i.log -log-level all
 EOF
 done
@@ -41,8 +38,8 @@ sleep 10
 d=$(date +%F-%H-%M)
 mkdir ~/$d
 
-
-for i in 190 191 194 195 196
+# move logs, stop servers
+for i in 190 191 192 194 195 196
 do
 	scp rootnh@192.168.120.$i:~/$i.log ~/$d
 	ssh rootnh@192.168.120.$i << EOF
