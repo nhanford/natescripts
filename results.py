@@ -3,7 +3,7 @@
 import re, glob
 
 for path in glob.glob('*.log'):
-	print path
+	print '\n',path
 	with open(path,'r') as fp:
 		for line in fp:
 			start = float(re.compile('START=\d+.\d+').search(line).group(0)[6:])
