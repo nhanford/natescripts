@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # create junk files, start servers
-for i in 190 191 194 195 196
+for i in 190 191 194 196
 do
 	echo "First contact to $i"
     ssh rootnh@192.168.120.$i << EOF
 ifconfig eth1 mtu 9000
-tc qdisc add dev eth1 root fq maxrate 200Mbit
+tc qdisc add dev eth1 root fq maxrate 250Mbit
 tc qdisc show dev eth1
 if [ ! -e "/tmp/zero.img" ]
 then
@@ -29,7 +29,7 @@ EOF
 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 sleep 10
 
-for i in 190 191 194 195 196
+for i in 190 191 194 196
 do
 	echo "second contac to $i"
 	ssh rootnh@192.168.120.$i << EOF 
@@ -45,7 +45,7 @@ d=$(date +%F-%H-%M)
 mkdir ~/$d
 
 # move logs, stop servers
-for i in 190 191 192 194 195 196
+for i in 190 191 192 194 196
 do
 	echo "third contact to $i"
 	scp rootnh@192.168.120.$i:~/$i.log ~/$d
