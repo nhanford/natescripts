@@ -25,7 +25,7 @@ scp alias-file xfer-file rootnh@192.168.120.192:~
 
 ssh rootnh@192.168.120.192 << EOF
 ifconfig eth1 mtu 9000
-globus-gridftp-server -S -p 8192 -data-interface 192.168.120.192 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
+globus-gridftp-server -S -p 8192 -data-interface 192.168.100.192 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
 ps aux | grep gridftp
 time globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 EOF
