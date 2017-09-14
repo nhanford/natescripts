@@ -27,7 +27,7 @@ ssh rootnh@192.168.120.192 << EOF
 ifconfig eth1 mtu 9000
 globus-gridftp-server -S -p 8192 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
 ps aux | grep gridftp
-globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
+time globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 EOF
 
 sleep 10
@@ -41,7 +41,7 @@ tc qdisc show dev eth1
 EOF
 done
 
-ssh rootnh@192.168.120.192 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
+ssh rootnh@192.168.120.192 time globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 
 sleep 10
 
