@@ -20,13 +20,16 @@ EOF
 done
 
 echo "*******Contacting receiving server"
+
+scp alias-file xfer-file rootnh@192.168.120.192:~
+
 ssh rootnh@192.168.120.192 << EOF
 ifconfig eth1 mtu 9000
 globus-gridftp-server -S -p 8192 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
 ps aux | grep gridftp
+globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 EOF
 
-globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 sleep 10
 
 for i in 190 191 194 195 
@@ -38,7 +41,8 @@ tc qdisc show dev eth1
 EOF
 done
 
-globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
+ssh 192.168.120.192 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
+
 sleep 10
 
 d=$(date +%F-%H-%M)
