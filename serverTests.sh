@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create junk files, start servers
-for i in 190 191 194 196
+for i in 190 191 194 195 196
 do
 	echo "*******First contact to $i"
     ssh rootnh@192.168.120.$i << EOF
@@ -19,17 +19,17 @@ ps aux | grep gridftp
 EOF
 done
 
-echo "*******attempting contact to receiving server"
+echo "*******Contacting receiving server"
 ssh rootnh@192.168.120.192 << EOF
 ifconfig eth1 mtu 9000
 globus-gridftp-server -S -p 8192 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
 ps aux | grep gridftp
 EOF
 
-globus-url-copy -cc 4 -p 1 -af alias-file -f xfer-file
+globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 sleep 10
 
-for i in 190 191 194 196
+for i in 190 191 194 195 196
 do
 	echo "********Second contact to $i"
 	ssh rootnh@192.168.120.$i << EOF 
@@ -38,14 +38,14 @@ tc qdisc show dev eth1
 EOF
 done
 
-globus-url-copy -cc 4 -p 1 -af alias-file -f xfer-file
+globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 sleep 10
 
 d=$(date +%F-%H-%M)
 mkdir ~/$d
 
 # move logs, stop servers
-for i in 190 191 192 194 196
+for i in 190 191 192 194 195 196
 do
 	echo "********Third contact to $i"
 	scp rootnh@192.168.120.$i:~/$i.log ~/$d
