@@ -7,8 +7,3 @@ do
 echo "DUCK"
 EOF
 done
-
-for i in {1..10}
-do
-	ssh rootnh@192.168.120.196 echo DUCK
-done

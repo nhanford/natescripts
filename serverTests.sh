@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create junk files, start servers
-for i in 190 191 194 195 196
+for i in 190 191 194 195 
 do
 	echo "*******First contact to $i"
     ssh rootnh@192.168.120.$i << EOF
@@ -29,7 +29,7 @@ EOF
 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 sleep 10
 
-for i in 190 191 194 195 196
+for i in 190 191 194 195 
 do
 	echo "********Second contact to $i"
 	ssh rootnh@192.168.120.$i << EOF 
@@ -45,7 +45,7 @@ d=$(date +%F-%H-%M)
 mkdir ~/$d
 
 # move logs, stop servers
-for i in 190 191 192 194 195 196
+for i in 190 191 192 194 195 
 do
 	echo "********Third contact to $i"
 	scp rootnh@192.168.120.$i:~/$i.log ~/$d
