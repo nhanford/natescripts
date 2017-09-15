@@ -14,7 +14,7 @@ then
 	chmod +r /tmp/zero.img
 fi
 ls /tmp | grep img
-globus-gridftp-server -S -p 8$i -data-interface 192.168.100.$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/$i.log -log-level debug
+globus-gridftp-server -S -p 8$i -data-interface 192.168.100.$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/$i.log -log-level all
 ps aux | grep gridftp
 EOF
 done
@@ -25,11 +25,11 @@ echo "*******Contacting receiving server"
 
 ssh rootnh@192.168.120.192 << EOF
 ifconfig eth1 mtu 9000
-globus-gridftp-server -S -p 8192 -data-interface 192.168.100.192 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level debug
+globus-gridftp-server -S -p 8192 -data-interface 192.168.100.192 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/192.log -log-level all
 ps aux | grep gridftp
 EOF
 
-time globus-url-copy -cc 10 -p 1 -af alias-file -f xfer-file
+time globus-url-copy -cc 6 -p 1 -af alias-file -f xfer-file -dbg
 
 sleep 10
 
@@ -42,7 +42,7 @@ tc qdisc show dev eth1
 EOF
 done
 
-time globus-url-copy -cc 10 -p 1 -af alias-file -f xfer-file
+time globus-url-copy -cc 10 -p 1 -af alias-file -f xfer-file -dbg
 
 sleep 10
 
