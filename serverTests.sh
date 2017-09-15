@@ -8,12 +8,12 @@ do
 ifconfig eth1 mtu 9000
 tc qdisc add dev eth1 root fq maxrate 330Mbit
 tc qdisc show dev eth1
-if [ ! -e "/tmp/zero.img" ]
+if [ ! -e "/storage/zero.img" ]
 then
-	dd if=/dev/zero of=/tmp/zero.img bs=1M count=4096
-	chmod +r /tmp/zero.img
+	dd if=/dev/zero of=/storage/zero.img bs=1M count=10240
+	chmod +r /storage/zero.img
 fi
-ls /tmp | grep img
+ls /storage | grep img
 globus-gridftp-server -S -p 8$i -data-interface 192.168.100.$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/$i.log -log-level all
 ps aux | grep gridftp
 EOF
