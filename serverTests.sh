@@ -42,7 +42,7 @@ tc qdisc show dev eth1
 EOF
 done
 
-ssh rootnh@192.168.120.192 globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
+time globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
 
 sleep 10
 
