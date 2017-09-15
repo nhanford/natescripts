@@ -29,7 +29,7 @@ globus-gridftp-server -S -p 8192 -data-interface 192.168.100.192 -aa -anonymous-
 ps aux | grep gridftp
 EOF
 
-time globus-url-copy -cc 6 -p 1 -af alias-file -f xfer-file -dbg
+time globus-url-copy -cc 6 -p 1 -af alias-file -f xfer-file
 
 sleep 10
 
@@ -42,7 +42,7 @@ tc qdisc show dev eth1
 EOF
 done
 
-time globus-url-copy -cc 10 -p 1 -af alias-file -f xfer-file -dbg
+time globus-url-copy -cc 10 -p 1 -af alias-file -f xfer-file
 
 sleep 10
 
