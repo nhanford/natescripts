@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create junk files, start servers
-for i in 190 191 194 201 
+for i in 190 191 194 
 do
 	echo "*******First contact to $i"
     ssh rootnh@192.168.120.$i << EOF
@@ -14,15 +14,24 @@ then
 	chmod +r /storage/zero.img
 fi
 ls /storage | grep img
-if [ $i -eq "201" ]
-then
-	echo correcting
-	i=195
-fi
 globus-gridftp-server -S -p 8$i -data-interface 192.168.100.$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/$i.log -log-level all
 ps aux | grep gridftp
 EOF
 done
+
+ssh rootnh@192.168.120.201 << EOF
+ifconfig eth1 mtu 9000
+tc qdisc add dev eth1 root fq maxrate 500Mbit
+tc qdisc show dev eth1
+if [ ! -e "/storage/zero.img" ]
+then
+	dd if=/dev/zero of=/storage/zero.img bs=1M count=10240
+	chmod +r /storage/zero.img
+fi
+ls /storage | grep img
+globus-gridftp-server -S -p 8195 -data-interface 192.168.100.195 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/195.log -log-level all
+ps aux | grep gridftp
+EOF
 
 echo "*******Contacting receiving server"
 
