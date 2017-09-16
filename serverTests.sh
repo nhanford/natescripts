@@ -14,6 +14,10 @@ then
 	chmod +r /storage/zero.img
 fi
 ls /storage | grep img
+if [ "$i" -eq "201" ]
+then
+	i=195
+fi
 globus-gridftp-server -S -p 8$i -data-interface 192.168.100.$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/$i.log -log-level all
 ps aux | grep gridftp
 EOF
