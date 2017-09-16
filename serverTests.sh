@@ -29,7 +29,7 @@ then
 	chmod +r /storage/zero.img
 fi
 ls /storage | grep img
-globus-gridftp-server -S -p 8195 -data-interface 192.168.100.195 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/195.log -log-level all
+globus-gridftp-server -S -p 8195 -data-interface 192.168.100.195 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/201.log -log-level all
 ps aux | grep gridftp
 EOF
 
