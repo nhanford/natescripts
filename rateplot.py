@@ -62,7 +62,7 @@ for path in glob.glob('*.csv'):
     if pacing and var:
         pacing = int(pacing.group(0)[1:])
         if pacing in variances['rate']:
-            variances['variance'][variances['rate'].index(pacing)] += var
+            variances['variance'][variances['rate'].index(pacing)] += (var/3000)
         else:
             variances['rate'].append(pacing)
             variances['variance'].append(var)
@@ -70,6 +70,9 @@ for path in glob.glob('*.csv'):
 df = pd.DataFrame(data=variances).sort_values('rate')
 fig, ax = plt.subplots()
 ax = df.plot(x='rate', y='variance')
+ax.set_title('Variance of throughput vs. pacing rate')
+ax.set_xlabel('Pacing rate (Mbps)')
+ax.set_ylabel('Throughput variance (Mbps)')
 plt.tight_layout()
 plt.savefig('variances.pdf', format='pdf')
 
