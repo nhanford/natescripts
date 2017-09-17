@@ -6,7 +6,7 @@ do
 	echo "*******First contact to $i"
     ssh rootnh@192.168.120.$i << EOF
 ifconfig eth1 mtu 9000
-tc qdisc add dev eth1 root fq maxrate 330Mbit
+tc qdisc add dev eth1 root fq maxrate 300Mbit
 tc qdisc show dev eth1
 if [ ! -e "/storage/zero.img" ]
 then
@@ -22,7 +22,7 @@ done
 echo "*******First contact to 201"
 ssh rootnh@192.168.120.201 << EOF
 ifconfig eth1 mtu 9000
-tc qdisc add dev eth1 root fq maxrate 330Mbit
+tc qdisc add dev eth1 root fq maxrate 300Mbit
 tc qdisc show dev eth1
 if [ ! -e "/storage/zero.img" ]
 then
