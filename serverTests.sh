@@ -76,3 +76,7 @@ pkill gridftp
 ps aux | grep gridftp
 EOF
 done
+
+cp results.py ~/$d
+cd ~/$d
+./results.py
