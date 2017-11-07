@@ -36,7 +36,7 @@ d=$(date +%F-%H-%M)
 mkdir ~/$d
 
 # move logs, stop servers
-for i in 190 191 192 201 
+for i in 190 191 192 194 200 201
 do
 	echo "********Third contact to $i"
 	scp rootnh@192.168.120.$i:~/$i.log ~/$d
