@@ -2,7 +2,7 @@
 # to be run from controller (193)
 
 # create junk files, start servers
-for i in 190 191 192 194 200
+for i in 111 112 113 114 115
 do
 	echo "*******First contact to $i"
     ssh rootnh@192.168.120.$i << EOF
@@ -15,18 +15,18 @@ then
 	chmod +r /storage/zero.img
 fi
 ls /storage | grep img
-globus-gridftp-server -S -p 8$i -data-interface 192.168.100.$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/$i.log -log-level all
+globus-gridftp-server -S -p 8$i -data-interface 192.168.200.$i -aa -anonymous-user 'nhanford' -home-dir / -Z ~/$i.log -log-level all
 ps aux | grep gridftp
 EOF
 done
 
 echo "*******Contacting receiving server"
 
-scp alias-file xfer-file rootnh@192.168.120.201:~
+scp alias-file xfer-file rootnh@192.168.120.116:~
 
 ssh rootnh@192.168.120.201 << EOF
 ifconfig eth1 mtu 9000
-globus-gridftp-server -S -p 8201 -data-interface 192.168.100.201 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/201.log -log-level all
+globus-gridftp-server -S -p 8201 -data-interface 192.168.200.116 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/116.log -log-level all
 ps aux | grep gridftp
 EOF
 
@@ -36,7 +36,7 @@ d=$(date +%F-%H-%M)
 mkdir ~/$d
 
 # move logs, stop servers
-for i in 190 191 192 194 200 201
+for i in 111 112 113 114 115 116
 do
 	echo "********Third contact to $i"
 	scp rootnh@192.168.120.$i:~/$i.log ~/$d
