@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create junk files, start servers
-for i in 190 191 
+for i in 190 191 192 194 200
 do
 	echo "*******First contact to $i"
     ssh rootnh@192.168.120.$i << EOF

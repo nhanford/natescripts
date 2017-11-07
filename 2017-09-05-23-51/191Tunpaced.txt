@@ -1,0 +1,5 @@
+Source: ftp://192.168.120.191:8191/tmp/
+Dest:   file:///tmp/
+  rand191.img
+
+    145752064 bytes        69.50 MB/sec avg        69.50 MB/sec inst    218103808 bytes        52.00 MB/sec avg        34.50 MB/sec inst    367001600 bytes        58.33 MB/sec avg        71.00 MB/sec inst    513802240 bytes        61.25 MB/sec avg        70.00 MB/sec inst    640679936 bytes        61.10 MB/sec avg        60.50 MB/sec inst

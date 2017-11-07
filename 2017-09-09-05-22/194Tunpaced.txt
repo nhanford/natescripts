@@ -1,0 +1,6 @@
+
+error: globus_ftp_client: the operation was aborted
+
+real	15m0.110s
+user	0m0.004s
+sys	0m0.000s

@@ -1,0 +1,5 @@
+Source: ftp://192.168.100.190:8190/tmp/
+Dest:   file:///dev/
+  zero190.img  ->  null
+
+            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst            0 bytes         0.00 MB/sec avg         0.00 MB/sec inst
