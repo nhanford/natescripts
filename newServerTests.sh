@@ -24,9 +24,9 @@ echo "*******Contacting receiving server"
 
 scp alias-file xfer-file rootnh@192.168.120.116:~
 
-ssh rootnh@192.168.120.201 << EOF
+ssh rootnh@192.168.120.116 << EOF
 ifconfig eth1 mtu 9000
-globus-gridftp-server -S -p 8201 -data-interface 192.168.200.116 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/116.log -log-level all
+globus-gridftp-server -S -p 8116 -data-interface 192.168.200.116 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/116.log -log-level all
 ps aux | grep gridftp
 EOF
 
