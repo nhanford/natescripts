@@ -2,7 +2,7 @@
 # to be run from controller (193)
 
 # create junk files, start servers
-for i in 111 112 113 114 115
+for i in 111 112 113 114 115 116
 do
 	echo "*******First contact to $i"
     ssh rootnh@192.168.120.$i << EOF
@@ -22,21 +22,21 @@ done
 
 echo "*******Contacting receiving server"
 
-scp alias-file xfer-file rootnh@192.168.120.116:~
+scp alias-file xfer-file rootnh@192.168.120.117:~
 
 ssh rootnh@192.168.120.116 << EOF
 ifconfig eth1 mtu 9000
-globus-gridftp-server -S -p 8116 -data-interface 192.168.200.116 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/116.log -log-level all
+globus-gridftp-server -S -p 8117 -data-interface 192.168.200.117 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/117.log -log-level all
 ps aux | grep gridftp
 EOF
 
-time globus-url-copy -cc 5 -p 1 -af alias-file -f xfer-file
+time globus-url-copy -cc 6 -p 1 -af alias-file -f xfer-file
 
 d=$(date +%F-%H-%M)
 mkdir ~/$d
 
 # move logs, stop servers
-for i in 111 112 113 114 115 116
+for i in 111 112 113 114 115 116 117
 do
 	echo "********Third contact to $i"
 	scp rootnh@192.168.120.$i:~/$i.log ~/$d
