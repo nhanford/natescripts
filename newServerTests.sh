@@ -11,7 +11,7 @@ tc qdisc del dev eth1 root
 tc qdisc show dev eth1
 if [ ! -e "/storage/zero.img" ]
 then
-	dd if=/dev/zero of=/storage/zero.img bs=1M count=5120
+	dd if=/dev/zero of=/storage/zero.img bs=1M count=1024
 	chmod +r /storage/zero.img
 fi
 ls /storage | grep img
