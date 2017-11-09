@@ -31,6 +31,8 @@ ps aux | grep gridftp
 EOF
 
 time globus-url-copy -cc 6 -p 1 -af alias-file -f xfer-file
+sleep 2
+ss -itn | grep 192.168.200
 
 d=$(date +%F-%H-%M)
 mkdir ~/$d
