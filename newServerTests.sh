@@ -22,11 +22,11 @@ done
 
 echo "*******Contacting receiving server"
 
-scp alias-file xfer-file rootnh@192.168.120.117:~
+scp alias-file xfer-file rootnh@192.168.120.118:~
 
-ssh rootnh@192.168.120.116 << EOF
+ssh rootnh@192.168.120.118 << EOF
 ifconfig eth1 mtu 9000
-globus-gridftp-server -S -p 8117 -data-interface 192.168.200.117 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/117.log -log-level all
+globus-gridftp-server -S -p 8117 -data-interface 192.168.200.118 -aa -anonymous-user 'nhanford' -home-dir / -Z ~/118.log -log-level all
 ps aux | grep gridftp
 EOF
 
@@ -36,7 +36,7 @@ d=$(date +%F-%H-%M)
 mkdir ~/$d
 
 # move logs, stop servers
-for i in 111 112 113 114 115 116 117
+for i in 111 112 113 114 115 116 118
 do
 	echo "********Third contact to $i"
 	scp rootnh@192.168.120.$i:~/$i.log ~/$d
